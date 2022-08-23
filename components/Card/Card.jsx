@@ -1,6 +1,6 @@
 
 const Card = (props) => {
-    console.log(props)
+    // console.log(props)
     return (
         <>
             <div className="w-full bg-light-grey border-none relative shadow-sm rounded-2xl">
