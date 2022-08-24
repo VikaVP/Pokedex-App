@@ -8,7 +8,7 @@
     <a href="https://github.com/VikaVP/Pokedex-App"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://moovie-time.web.app ">View Demo</a>
+    <a href="https://pokedex-app-4592f.web.app ">View Demo</a>
     ·
     <a href="https://github.com/VikaVP/Pokedex-App/issues">Report Bug</a>
     ·
@@ -17,7 +17,7 @@
 </p>
 
 
-[![Nuxtjs](https://img.shields.io/badge/Nuxt-002E3B?style=for-the-badge&logo=nuxtdotjs&logoColor=#00DC82)](https://www.nuxtjs.org/)
+[![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white))](https://www.nextjs.org/)
 
 [![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com//)
 
@@ -100,7 +100,7 @@ npm install
 ## Demo
 
 See the [open issues](https://github.com/VikaVP/Pokedex-App/issues) for a list of proposed features (and known issues).
-[Click Here to go to Demo website on netlify](https://moovie-time.web.app )
+[Click Here to go to Demo website on netlify](https://pokedex-app-4592f.web.app )
 
 <!-- CONTRIBUTING -->
 
