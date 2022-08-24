@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react'
 import axios from 'axios'
 
-const url = 'https://pokeapi.co/api/v2/pokemon/'
+const url = 'https://pokeapi.co/api/v2/'
 
 export const lists = []
 
@@ -11,7 +11,10 @@ export const PokedexContext = React.createContext({
     getLists: async () => null,
     type: undefined,
     singlePokemon: undefined,
-    getSinglePokemon: async () => null
+    getSinglePokemon: async () => null,
+    getListsBasedFilter: async () => null,
+    filtered: false,
+    loader: false
 })
 
 
@@ -20,19 +23,24 @@ export const usePokedex = () => useContext(PokedexContext)
 
 export const PokedexProvider = ({ children }) => {
     const [list, setList] = useState(lists)
-    const [type, setType] = useState(null)
+    const [filtered, setFiltered] = useState(false)
+    const [gender, setGender] = useState(null)
     const [singlePokemon, setSinglePokemon] = useState(null)
+    const [loader, setLoader] = useState(false)
 
 
     const getLists = useCallback(async (limit) => {
+        setLoader(true)
         try {
             let res = await axios({
                 method: 'get',
-                url: `${url}?limit=${limit}`,
+                url: `${url}pokemon/?limit=${limit}`,
             });
 
             let data = res.data;
+            setFiltered(false)
             setList(data)
+            setLoader(false)
         } catch (error) {
             console.log(error.response);
 
@@ -40,15 +48,38 @@ export const PokedexProvider = ({ children }) => {
         }
     }, [])
 
-    const getTypeList = useCallback(async () => {
+    const getListsBasedFilter = useCallback(async (id) => {
+        setLoader(true)
         try {
             let res = await axios({
                 method: 'get',
-                url: 'https://pokeapi.co/api/v2/type',
+                url: `${url}gender/${id}`,
+            });
+
+            let data = res.data.pokemon_species_details;
+            let newData = {}
+            newData.results = data.map(dt => {
+                return dt.pokemon_species
+            })
+            setFiltered(true)
+            setList(newData)
+            setLoader(false)
+        } catch (error) {
+            console.log(error.response);
+
+            return error.response;
+        }
+    }, [])
+
+    const getGenderList = useCallback(async () => {
+        try {
+            let res = await axios({
+                method: 'get',
+                url: `${url}gender`,
             });
 
             let data = res.data.results;
-            setType(data)
+            setGender(data)
         } catch (error) {
             console.log(error.response);
 
@@ -120,8 +151,8 @@ export const PokedexProvider = ({ children }) => {
 
     useEffect(() => {
         getLists(0)
-        getTypeList()
+        getGenderList()
     }, [getLists])
 
-    return <PokedexContext.Provider value={{ list, getLists, getTypeList, type, getSinglePokemon, singlePokemon }}>{children}</PokedexContext.Provider>
+    return <PokedexContext.Provider value={{ list, getLists, getGenderList, gender, getSinglePokemon, singlePokemon, getListsBasedFilter, filtered, loader }}>{children}</PokedexContext.Provider>
 }

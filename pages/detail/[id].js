@@ -21,7 +21,7 @@ export default function Detail() {
 
         <>
           <Header />
-          <div className='pt-12'>
+          <div className='pt-12 pb-10 bg-gradient-to-tr from-white-pastel to-white'>
             <div className="flex items-center flex-col justify-center gap-6 mt-10">
               <ImageRounded id={singlePokemon.id || ''} />
               <div className=" text-black-pastel text-2xl font-bold text-center py-2 px-5 uppercase">
@@ -36,7 +36,7 @@ export default function Detail() {
               {singlePokemon.stats && singlePokemon.stats.map((stat, index) => {
                 return <ProgressList key={index} stat={stat} />
               })}
-              <div className='flex gap-5 mt-5 flex-col'>
+              <div className='flex gap-10 mt-5 flex-col'>
                 <div className="text-lg font-bold text-center">Sprites Galleries</div>
                 <div className='grid lg:grid-cols-7 md:grid-cols-7 xs:grid-cols-1 sm:grid-cols-2 gap-5 '>
                   {
